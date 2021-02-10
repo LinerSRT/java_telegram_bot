@@ -29,7 +29,7 @@ public class LinerBot {
 
 
     public LinerBot() {
-        this(5,
+        this(20,
                 10,
                 50,
                 new ArrayList<>(),
@@ -74,8 +74,7 @@ public class LinerBot {
     }
 
     public static void removeFromMessageStack(Message message) {
-        if (linerBot.messageStack.remove(message))
-            save(linerBot);
+        linerBot.messageStack.remove(message);
     }
 
     public static int messageStackSize() {
@@ -83,7 +82,11 @@ public class LinerBot {
     }
 
     public static void clearMessageStack() {
-        linerBot.messageStack.forEach(LinerBot::removeFromMessageStack);
+        for(Message message:linerBot.messageStack) {
+            deleteMessage(message);
+        }
+        linerBot.messageStack.clear();
+        save(linerBot);
     }
 
     private static Message addThenDeleteMessage() {
@@ -98,7 +101,6 @@ public class LinerBot {
     }
 
     public static void deleteMessage(Message message){
-        removeFromMessageStack(message);
         Main.bot.execute(new DeleteMessage(message.chat().id(), message.messageId()));
     }
 
