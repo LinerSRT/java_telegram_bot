@@ -1,8 +1,8 @@
 package com.liner.triggers;
 
+import com.liner.LinerBot;
 import com.liner.messages.MessageHandler;
 import com.liner.models.User;
-import com.liner.utils.Bot;
 import com.pengrad.telegrambot.model.*;
 
 import java.util.concurrent.TimeUnit;
@@ -18,11 +18,10 @@ public class Trigger extends TriggerEntity{
             @Override
             public void onTriggered(User sender, User target, String[] arguments) {
                 if(trigger.response != null)
-                    Bot.replyText(
+                    LinerBot.replyText(
                             sender.getLastMessage().chat().id(),
                             sender.getLastMessage().messageId(),
-                            trigger.response,
-                            TimeUnit.SECONDS.toMillis(60)
+                            trigger.response
                     );
             }
         };

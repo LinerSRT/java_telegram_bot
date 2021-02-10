@@ -1,10 +1,10 @@
 package com.liner.games.casino.dice;
 
+import com.liner.LinerBot;
 import com.liner.games.AbstractGame;
 import com.liner.games.casino.CasinoUser;
 import com.liner.models.User;
 import com.liner.ui.UI;
-import com.liner.utils.Bot;
 import com.pengrad.telegrambot.model.Message;
 
 import java.util.Random;
@@ -91,11 +91,11 @@ public class DiceGame extends AbstractGame<DiceData, CasinoUser> {
             stringBuilder.append("\n\n\t\t\t\t\uD83C\uDF81УРА! Вы выиграли: \uD83D\uDCB5").append(gameData.cashWin).append("\n");
         }
         stringBuilder.append("\t\t\t\t\uD83D\uDCB0Ваш баланс: \uD83D\uDCB5").append(gameUser.getCash());
-        Bot.sendText(message.chat().id(), UI.createResponse(
+        LinerBot.sendText(message.chat().id(), UI.createResponse(
                 "\uD83C\uDFB2",
                 "Игра <<Кубики>>",
                 stringBuilder.toString()
-        ), TimeUnit.SECONDS.toMillis(Integer.MAX_VALUE));
+        ));
         gameData.cashWin = 0;
         gameUser.save();
         gameData.save();

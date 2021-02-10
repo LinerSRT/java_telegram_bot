@@ -1,9 +1,9 @@
 package com.liner.commands;
 
+import com.liner.LinerBot;
 import com.liner.messages.KeyPair;
 import com.liner.models.User;
 import com.liner.ui.UI;
-import com.liner.utils.Bot;
 import com.liner.utils.DB;
 import com.liner.utils.Icons;
 
@@ -44,11 +44,11 @@ public class AdminListCommand extends Command {
             if (user.isAdmin())
                 stringBuilder.append("\t\t\t\t\uD83D\uDC64 @").append(user.getUsername()).append(" - [").append(user.getId()).append("]").append("\n");
         });
-        Bot.sendText(getChatID(), UI.createResponse(
+        LinerBot.sendText(getChatID(), UI.createResponse(
                 Icons.ORANGE_ROMB,
                 "Список администраторов",
                 stringBuilder.toString()
-        ), TimeUnit.SECONDS.toMillis(60));
+        ));
     }
 
     @Override

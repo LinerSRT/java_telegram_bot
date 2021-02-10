@@ -1,8 +1,8 @@
 package com.liner.commands;
 
+import com.liner.LinerBot;
 import com.liner.messages.KeyPair;
 import com.liner.models.User;
-import com.liner.utils.Bot;
 import com.liner.utils.DB;
 import com.liner.utils.Icons;
 
@@ -55,7 +55,7 @@ public class VoteCommand extends Command{
             for (String action : vote_types) {
                 stringBuilder.append("\n\t\t\t\uD83D\uDCCC").append(action);
             }
-            Bot.sendText(getChatID(), stringBuilder.toString(), TimeUnit.SECONDS.toMillis(60));
+            LinerBot.sendText(getChatID(), stringBuilder.toString());
         } else {
             int voteID = Math.abs(new Random().nextInt());
             String voteType = arguments[1];
@@ -80,7 +80,7 @@ public class VoteCommand extends Command{
             stringBuilder.append("\n\uD83D\uDCC8Необходимо "+userList.size()+" голосов для решения без участия администраторов");
 
 
-            Bot.sendText(getChatID(), stringBuilder.toString(), TimeUnit.SECONDS.toMillis(60));
+            LinerBot.sendText(getChatID(), stringBuilder.toString());
         }
     }
 

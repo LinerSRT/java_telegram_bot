@@ -1,10 +1,10 @@
 package com.liner.commands;
 
+import com.liner.LinerBot;
 import com.liner.Main;
 import com.liner.messages.KeyPair;
 import com.liner.models.User;
 import com.liner.ui.UI;
-import com.liner.utils.Bot;
 import com.liner.utils.Icons;
 
 import java.util.concurrent.TimeUnit;
@@ -37,13 +37,13 @@ public class CleanCommand extends Command{
 
     @Override
     public void execute(User sender, User target, String[] arguments) {
-        int count = Bot.getStackSize();
-        Bot.clear();
-        Bot.sendText(getChatID(), UI.createResponse(
+        int count = LinerBot.messageStackSize();
+        LinerBot.clearMessageStack();
+        LinerBot.sendText(getChatID(), UI.createResponse(
                 Icons.CHECK,
                 "Готово",
                 "Очистка завершена! Очищено: "+count+" шт."
-        ), TimeUnit.SECONDS.toMillis(5));
+        ));
     }
     @Override
     public KeyPair[] getCommandArgumentKeyPairs() {

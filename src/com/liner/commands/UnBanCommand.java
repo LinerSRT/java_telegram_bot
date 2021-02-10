@@ -1,9 +1,9 @@
 package com.liner.commands;
 
+import com.liner.LinerBot;
 import com.liner.messages.KeyPair;
 import com.liner.models.User;
 import com.liner.ui.UI;
-import com.liner.utils.Bot;
 import com.liner.utils.DB;
 import com.liner.utils.Icons;
 import com.liner.utils.Other;
@@ -42,17 +42,17 @@ public class UnBanCommand extends Command {
         if (target != null) {
             if (target.isBanned()) {
                 target.setBanned(false);
-                Bot.sendText(getChatID(), UI.createResponse(
+                LinerBot.sendText(getChatID(), UI.createResponse(
                         Icons.CHECK,
                         "Пользователь разбанен",
                         "Теперь @" + target.getUsername() + " больше не забанен и может писать сообщения!"
-                ), TimeUnit.SECONDS.toMillis(60));
+                ));
             } else {
-                Bot.sendText(getChatID(), UI.createResponse(
+                LinerBot.sendText(getChatID(), UI.createResponse(
                         Icons.WARN,
                         "Пользователь уже разбанен",
                         "Вы не можете разбанить @" + target.getUsername() + " так как он не забанен!"
-                ), TimeUnit.SECONDS.toMillis(60));
+                ));
             }
         } else if (arguments.length > 1) {
             List<User> userList = DB.connect(null).all(User.class);
@@ -76,31 +76,31 @@ public class UnBanCommand extends Command {
             if (targetUser != null) {
                 if (targetUser.isBanned()) {
                     targetUser.setBanned(false);
-                    Bot.sendText(getChatID(), UI.createResponse(
+                    LinerBot.sendText(getChatID(), UI.createResponse(
                             Icons.CHECK,
                             "Пользователь разбанен",
                             "Теперь @" + targetUser.getUsername() + " больше не забанен и может писать сообщения!"
-                    ), TimeUnit.SECONDS.toMillis(60));
+                    ));
                 } else {
-                    Bot.sendText(getChatID(), UI.createResponse(
+                    LinerBot.sendText(getChatID(), UI.createResponse(
                             Icons.WARN,
                             "Пользователь уже разбанен",
                             "Вы не можете разбанить @" + targetUser.getUsername() + " так как он не забанен!"
-                    ), TimeUnit.SECONDS.toMillis(60));
+                    ));
                 }
             } else {
-                Bot.sendText(getChatID(), UI.createResponse(
+                LinerBot.sendText(getChatID(), UI.createResponse(
                         Icons.FAIL,
                         "Ошибка!",
                         "Я не смог узнать кого вы хотите разбанить"
-                ), TimeUnit.SECONDS.toMillis(60));
+                ));
             }
         } else {
-            Bot.sendText(getChatID(), UI.createResponse(
+            LinerBot.sendText(getChatID(), UI.createResponse(
                     Icons.FAIL,
                     "Ошибка!",
                     "Я не смог узнать кого вы хотите разбанить"
-            ), TimeUnit.SECONDS.toMillis(60));
+            ));
         }
     }
 

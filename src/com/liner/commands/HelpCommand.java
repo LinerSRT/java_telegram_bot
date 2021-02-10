@@ -1,9 +1,9 @@
 package com.liner.commands;
 
+import com.liner.LinerBot;
 import com.liner.messages.KeyPair;
 import com.liner.models.User;
 import com.liner.ui.UI;
-import com.liner.utils.Bot;
 import com.liner.utils.Icons;
 
 import java.util.List;
@@ -56,11 +56,11 @@ public class HelpCommand extends Command {
             stringBuilder.append(icon).append(command.getCommand()).append(" - ").append(command.getDescription()).append("\n");
         }
         stringBuilder.append("\nОбозначения:\n" + Icons.RED_TRIANGLE + " - доступно создателю\n" + Icons.ORANGE_ROMB + " - доступно администраторам\n" + Icons.BLUE_ROMB + " - доступно всем\n\n");
-        Bot.sendText(getChatID(), UI.createResponse(
+        LinerBot.sendText(getChatID(), UI.createResponse(
                 "⚙\uD83D\uDCC4",
                 "Список доступных комманд",
                 stringBuilder.toString()
-        ), TimeUnit.SECONDS.toMillis(60));
+        ));
     }
 
     @Override

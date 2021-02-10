@@ -1,7 +1,7 @@
 package com.liner.games;
 
+import com.liner.LinerBot;
 import com.liner.models.User;
-import com.liner.utils.Bot;
 import com.pengrad.telegrambot.model.Message;
 
 import java.util.concurrent.TimeUnit;
@@ -203,14 +203,14 @@ public class Game2048 extends Game{
                 break;
         }
         if(oldUI != null)
-            Bot.delete(oldUI, false);
-        oldUI = Bot.sendText(message.chat().id(), getUI(), TimeUnit.MINUTES.toMillis(5));
-        Bot.delete(message, false);
+            LinerBot.deleteMessage(oldUI);
+        oldUI = LinerBot.sendText(message.chat().id(), getUI());
+        LinerBot.deleteMessage(message);
     }
 
     @Override
     public void start() {
-        oldUI = Bot.sendText(player.getLastMessage().chat().id(), getUI(), TimeUnit.MINUTES.toMillis(5));
-        Bot.delete(player.getLastMessage(), false);
+        oldUI = LinerBot.sendText(player.getLastMessage().chat().id(), getUI());
+        LinerBot.deleteMessage(player.getLastMessage());
     }
 }

@@ -1,7 +1,7 @@
 package com.liner.games;
 
+import com.liner.LinerBot;
 import com.liner.models.User;
-import com.liner.utils.Bot;
 import com.pengrad.telegrambot.model.Message;
 
 import java.util.Arrays;
@@ -42,7 +42,7 @@ public class GameSession1 {
                         if (user.getId() == player.getId()) {
                             game.play(message, entry);
                         } else {
-                            Bot.delete(message, false);
+                            LinerBot.deleteMessage(message);
                         }
                     }
                 }

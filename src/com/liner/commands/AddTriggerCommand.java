@@ -1,12 +1,12 @@
 package com.liner.commands;
 
+import com.liner.LinerBot;
 import com.liner.Main;
 import com.liner.messages.KeyPair;
 import com.liner.models.User;
 import com.liner.triggers.Trigger;
 import com.liner.triggers.TriggerEntity;
 import com.liner.ui.UI;
-import com.liner.utils.Bot;
 import com.liner.utils.DB;
 import com.liner.utils.Icons;
 import com.pengrad.telegrambot.model.*;
@@ -82,23 +82,22 @@ public class AddTriggerCommand extends Command {
             response = stringBuilder.toString();
             createTrigger(new Trigger(arguments[1], response, TriggerEntity.Type.TEXT), arguments[1]);
         } else {
-            Bot.sendText(getChatID(), UI.createResponse(
+            LinerBot.sendText(getChatID(), UI.createResponse(
                     Icons.WARN,
                     "Внимание",
                     "Вы ввели не верные аргументы или не прикрепили сообщение на которое нужно реагировать!"
-            ), TimeUnit.SECONDS.toMillis(60));
+            ));
         }
     }
 
     private void createTrigger(Trigger trigger, String listening) {
-        Bot.sendText(getChatID(), UI.createResponse(
+        LinerBot.sendText(getChatID(), UI.createResponse(
                 Icons.CHECK,
                 "Отлично, триггер создан",
                 "\n\t\t\t" + Icons.LISTEN + "Слушает: " + listening + "\t\t\t" + Icons.TYPE + "Отвечает: " + response
-        ), TimeUnit.SECONDS.toMillis(60));
-        Main.triggerList.add(trigger);
-        DB.connect("triggers").set(Main.triggerList);
-        Main.loadTriggers();
+        ));
+        Main.linerBot.triggerList.add(trigger);
+        LinerBot.save(Main.linerBot);
     }
 
     @Override

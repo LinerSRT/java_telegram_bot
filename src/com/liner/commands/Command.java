@@ -1,5 +1,6 @@
 package com.liner.commands;
 
+import com.liner.LinerBot;
 import com.liner.messages.ArgumentExtractor;
 import com.liner.messages.KeyPair;
 import com.liner.messages.KeyValue;
@@ -8,7 +9,6 @@ import com.liner.models.User;
 import com.liner.triggers.CommandTrigger;
 import com.liner.triggers.TriggerEntity;
 import com.liner.ui.UI;
-import com.liner.utils.Bot;
 import com.liner.utils.Icons;
 import com.pengrad.telegrambot.model.Message;
 
@@ -33,38 +33,33 @@ public abstract class Command {
                     if (sender.isOwner())
                         execute(sender, target, arguments);
                     else
-                        Bot.sendText(getChatID(), UI.createResponse(
+                        LinerBot.sendText(getChatID(), UI.createResponse(
                                 Icons.FUCK,
-                                "Узбагойся!",
+                                "@"+sender.getUsername()+" узбагойся!",
                                 "Данная команда доступна только создателю!"
-                        ), TimeUnit.SECONDS.toMillis(60));
+                        ));
                 } else if (needAdminRight()) {
                     if (sender.isAdmin() || sender.isOwner())
                         execute(sender, target, arguments);
                     else
-                        Bot.sendText(getChatID(), UI.createResponse(
+                        LinerBot.sendText(getChatID(), UI.createResponse(
                                 Icons.FUCK,
-                                "Узбагойся!",
+                                "@"+sender.getUsername()+" узбагойся!",
                                 "Данная команда доступна только администраторам!"
-                        ), TimeUnit.SECONDS.toMillis(60));
+                        ));
                 } else if (needNotBeBanned()) {
                     if (!sender.isBanned()) {
                         execute(sender, target, arguments);
                     } else
-                        Bot.sendText(getChatID(), UI.createResponse(
+                        LinerBot.sendText(getChatID(), UI.createResponse(
                                 Icons.FUCK,
-                                "Узбагойся!",
+                                "@"+sender.getUsername()+" узбагойся!",
                                 "Ты не должнен быть забанен, что бы воспользоватся командой!"
-                        ), TimeUnit.SECONDS.toMillis(60));
+                        ));
                 } else {
                     execute(sender, target, arguments);
                 }
-                new Timer().schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        Bot.delete(getMessage(), false);
-                    }
-                }, 1000);
+                LinerBot.deleteMessage(getMessage());
             }
         };
     }

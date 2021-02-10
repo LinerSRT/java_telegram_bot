@@ -1,9 +1,9 @@
 package com.liner.commands;
 
+import com.liner.LinerBot;
 import com.liner.messages.KeyPair;
 import com.liner.models.User;
 import com.liner.ui.UI;
-import com.liner.utils.Bot;
 import com.liner.utils.DB;
 import com.liner.utils.Icons;
 import com.liner.utils.Other;
@@ -42,17 +42,17 @@ public class RemoveAdminCommand extends Command {
         if (target != null) {
             if (target.isAdmin()) {
                 target.setAdmin(false);
-                Bot.sendText(getChatID(), UI.createResponse(
+                LinerBot.sendText(getChatID(), UI.createResponse(
                         Icons.CHECK,
                         "Администратор удален",
                         "Теперь @" + target.getUsername() + " лишен прав администратора."
-                ), TimeUnit.SECONDS.toMillis(60));
+                ));
             } else {
-                Bot.sendText(getChatID(), UI.createResponse(
+                LinerBot.sendText(getChatID(), UI.createResponse(
                         Icons.CHECK,
                         "Внимание",
                         "@" + target.getUsername() + " не является администратором."
-                ), TimeUnit.SECONDS.toMillis(60));
+                ));
             }
         } else if (arguments.length > 1) {
             List<User> userList = DB.connect(null).all(User.class);
@@ -76,31 +76,31 @@ public class RemoveAdminCommand extends Command {
             if (targetUser != null) {
                 if (targetUser.isAdmin()) {
                     targetUser.setAdmin(false);
-                    Bot.sendText(getChatID(), UI.createResponse(
+                    LinerBot.sendText(getChatID(), UI.createResponse(
                             Icons.CHECK,
                             "Администратор удален",
                             "Теперь @" + targetUser.getUsername() + " лишен прав администратора."
-                    ), TimeUnit.SECONDS.toMillis(60));
+                    ));
                 } else {
-                    Bot.sendText(getChatID(), UI.createResponse(
+                    LinerBot.sendText(getChatID(), UI.createResponse(
                             Icons.CHECK,
                             "Внимание",
                             "@" + targetUser.getUsername() + " не является администратором."
-                    ), TimeUnit.SECONDS.toMillis(60));
+                    ));
                 }
             } else {
-                Bot.sendText(getChatID(), UI.createResponse(
+                LinerBot.sendText(getChatID(), UI.createResponse(
                         Icons.FAIL,
                         "Ошибка",
                         "Я не смог понять у кого забрать права администратора."
-                ), TimeUnit.SECONDS.toMillis(60));
+                ));
             }
         } else {
-            Bot.sendText(getChatID(), UI.createResponse(
+            LinerBot.sendText(getChatID(), UI.createResponse(
                     Icons.FAIL,
                     "Ошибка",
                     "Я не смог понять у кого забрать права администратора."
-            ), TimeUnit.SECONDS.toMillis(60));
+            ));
         }
     }
 

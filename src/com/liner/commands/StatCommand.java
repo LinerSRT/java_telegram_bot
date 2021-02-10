@@ -1,11 +1,11 @@
 package com.liner.commands;
 
+import com.liner.LinerBot;
 import com.liner.messages.KeyPair;
 import com.liner.models.MessagesStats;
 import com.liner.models.User;
 import com.liner.models.Word;
 import com.liner.ui.UI;
-import com.liner.utils.Bot;
 
 import java.text.SimpleDateFormat;
 import java.util.Collections;
@@ -42,11 +42,11 @@ public class StatCommand extends Command {
     @Override
     public void execute(User sender, User target, String[] arguments) {
         String ui = target == null ? createUI(sender) : createUI(target);
-        Bot.sendText(getChatID(), UI.createResponse(
+        LinerBot.sendText(getChatID(), UI.createResponse(
                 "\uD83D\uDC64",
                 "Детальная статистика пользователя",
                 ui
-        ), TimeUnit.SECONDS.toMillis(60));
+        ));
     }
 
     private String createUI(User user) {

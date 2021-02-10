@@ -1,6 +1,6 @@
 package com.liner.models;
 
-import com.liner.utils.Bot;
+import com.liner.LinerBot;
 import com.liner.utils.DB;
 import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
@@ -125,8 +125,8 @@ public class User {
 
     public void processUpdate(Message message) {
         if(isBanned()){
-            Bot.delete(message, false);
-            Bot.sendText(message.chat().id(), "Ты забанен, не пиши сюда больше!", TimeUnit.SECONDS.toMillis(3));
+            LinerBot.deleteMessage(message);
+            LinerBot.sendText(message.chat().id(), "Ты забанен, не пиши сюда больше!");
             return;
         }
         messagesStats.handleMessage(message);

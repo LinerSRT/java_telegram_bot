@@ -1,13 +1,12 @@
 package com.liner.commands;
 
+import com.liner.LinerBot;
+import com.liner.RPGGame;
+import com.liner.messages.ArgumentExtractor;
 import com.liner.messages.KeyPair;
 import com.liner.models.User;
-import com.liner.ui.UI;
-import com.liner.utils.Bot;
-import com.liner.utils.Icons;
-import com.liner.utils.Other;
 
-public class TestCommand extends Command{
+public class TestCommand extends Command {
     @Override
     public String getCommand() {
         return "/test";
@@ -35,12 +34,17 @@ public class TestCommand extends Command{
 
     @Override
     public void execute(User sender, User target, String[] arguments) {
-        String command = Other.fromArray(arguments, 1);
-        Bot.sendText(getChatID(), UI.createResponse(Icons.CHECK, command.split("=")[0], command.split("=")[1]));
+        new ArgumentExtractor(getMessage()).extract(getCommandArgumentKeyPairs()).forEach(keyValue -> {
+            if (keyValue.key.equals("size")) {
+                LinerBot.sendText(getChatID(), new RPGGame((Integer) keyValue.value).drawMap());
+            }
+        });
     }
 
     @Override
     public KeyPair[] getCommandArgumentKeyPairs() {
-        return new KeyPair[0];
+        return new KeyPair[]{
+                new KeyPair("size", Integer.class)
+        };
     }
 }

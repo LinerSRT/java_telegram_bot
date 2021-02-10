@@ -1,9 +1,9 @@
 package com.liner.commands;
 
+import com.liner.LinerBot;
 import com.liner.messages.KeyPair;
 import com.liner.models.User;
 import com.liner.ui.UI;
-import com.liner.utils.Bot;
 import com.liner.utils.Icons;
 
 import java.util.concurrent.TimeUnit;
@@ -39,24 +39,24 @@ public class MakeAdminCommand extends Command {
         if (target != null) {
             if (!target.isAdmin()) {
                 target.setAdmin(true);
-                Bot.sendText(getChatID(), UI.createResponse(
+                LinerBot.sendText(getChatID(), UI.createResponse(
                         Icons.CHECK,
                         "Администратор добавлен",
                         "Теперь @" + target.getUsername() + " администратор."
-                ), TimeUnit.SECONDS.toMillis(60));
+                ));
             } else {
-                Bot.sendText(getChatID(), UI.createResponse(
+                LinerBot.sendText(getChatID(), UI.createResponse(
                         Icons.WARN,
                         "Внимание",
                         "@" + target.getUsername() + " уже является администратором!"
-                ), TimeUnit.SECONDS.toMillis(60));
+                ));
             }
         } else {
-            Bot.sendText(getChatID(), UI.createResponse(
+            LinerBot.sendText(getChatID(), UI.createResponse(
                     Icons.WARN,
                     "Внимание",
                     "Я не смог понять кому выдать права администратора."
-            ), TimeUnit.SECONDS.toMillis(60));
+            ));
         }
     }
 

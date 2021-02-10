@@ -1,9 +1,9 @@
 package com.liner.commands;
 
+import com.liner.LinerBot;
 import com.liner.messages.KeyPair;
 import com.liner.models.User;
 import com.liner.ui.UI;
-import com.liner.utils.Bot;
 import com.liner.utils.DB;
 import com.liner.utils.Icons;
 
@@ -50,11 +50,11 @@ public class BanListCommand extends Command {
         });
         if (banned == 0)
             stringBuilder.append("\t\t\t\t Никто еще не сидит на бутылке");
-        Bot.sendText(getChatID(), UI.createResponse(
+        LinerBot.sendText(getChatID(), UI.createResponse(
                 "\uD83C\uDF7E",
                 "Список любителей бутылки",
                 stringBuilder.toString()
-        ), TimeUnit.SECONDS.toMillis(60));
+        ));
     }
 
     @Override

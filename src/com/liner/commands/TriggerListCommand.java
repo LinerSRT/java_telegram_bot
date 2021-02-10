@@ -1,10 +1,10 @@
 package com.liner.commands;
 
+import com.liner.LinerBot;
 import com.liner.Main;
 import com.liner.messages.KeyPair;
 import com.liner.models.User;
 import com.liner.ui.UI;
-import com.liner.utils.Bot;
 import com.liner.utils.Icons;
 
 import java.util.concurrent.TimeUnit;
@@ -38,7 +38,7 @@ public class TriggerListCommand extends Command {
     @Override
     public void execute(User sender, User target, String[] arguments) {
         StringBuilder stringBuilder = new StringBuilder();
-        Main.triggerList.forEach(trigger -> {
+        Main.linerBot.triggerList.forEach(trigger -> {
             String listening;
             switch (trigger.type) {
                 case STICKER:
@@ -58,11 +58,11 @@ public class TriggerListCommand extends Command {
             }
             stringBuilder.append("\n\uD83D\uDCCC").append("Слушает: \n\t\t\t\t\t\t\t\t").append(listening).append("\n\t\t\t\t\t\t\t\t").append(Icons.TYPE).append("Отвечает: ").append(trigger.response).append("\n");
         });
-        Bot.sendText(getChatID(), UI.createResponse(
+        LinerBot.sendText(getChatID(), UI.createResponse(
                 "\uD83E\uDDF2",
                 "Список тригерров:",
                 stringBuilder.toString()
-        ), TimeUnit.SECONDS.toMillis(60));
+        ));
     }
 
     @Override
